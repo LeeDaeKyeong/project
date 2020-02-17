@@ -120,6 +120,7 @@ public class SaleDAO {
 					Order order = new Order();
 					order.setOrder_date(rs.getInt("order_date"));
 					order.setOrder_num(rs.getInt("order_num"));
+					order.setMember_id(rs.getString("member_id"));
 					order.setMember_name(rs.getString("member_name"));
 					order.setMember_phone(rs.getString("member_phone"));
 					order.setMember_email(rs.getString("member_email"));

@@ -122,13 +122,13 @@
 							<tbody>
 								<tr height="40px"
 									style="cursor: pointer;"
-									onClick="window.open('reservationdetail.sa?reservation_num=${reservation.reservation_num }&member_name=${reservation.member_name }&member_phone=${reservation.member_phone }&member_email=${reservation.member_email }&member_birth=${reservation.member_birth }&member_gender=${reservation.member_gender }','new','width=1300px,height=550px,location=no,status=no,scrollbars=no');">
-									<td style = "${reservation.payment_status eq '결제완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.payment_date }</td>
-									<td style = "${reservation.payment_status eq '결제완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.reservation_num }</td>
-									<td style = "${reservation.payment_status eq '결제완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.member_name }</td>
-									<td style = "${reservation.payment_status eq '결제완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.member_phone }</td>
-									<td style = "${reservation.payment_status eq '결제완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.reservation_date }</td>
-									<td style = "${reservation.payment_status eq '결제완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.payment_status }</td>
+									onClick="window.open('reservationdetail.sa?reservation_num=${reservation.reservation_num }&member_id=${reservation.member_id }','new','width=1300px,height=550px,location=no,status=no,scrollbars=no');">
+									<td style = "${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.payment_date }</td>
+									<td style = "${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.reservation_num }</td>
+									<td style = "${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.member_name }</td>
+									<td style = "${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.member_phone }</td>
+									<td style = "${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.reservation_date }</td>
+									<td style = "${reservation.payment_status eq '결제완료' ? 'background-color : lightgray' : 'border : solid 1px pink'  };">${reservation.payment_status }</td>
 									<td style = "${reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'border : solid 1px pink'  };">${reservation.reservation_status }</td>
 								</tr>
 							</tbody>
@@ -175,6 +175,6 @@
 			</c:otherwise>
 		</c:choose>
 	</section>
-	<a href="Msale/calendar.jsp">예약 달력 보기</a>
+	<a href="calendar.sa">예약 달력 보기</a>
 </body>
 </html>

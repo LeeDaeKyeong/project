@@ -124,12 +124,12 @@
 							<tbody>
 								<tr  height="40px"
 									style="cursor: pointer;"
-									onClick="window.open('orderdetail.sa?order_num=${order.order_num }&member_name=${order.member_name }&member_phone=${order.member_phone }&member_email=${order.member_email }&member_birth=${order.member_birth }&member_gender=${order.member_gender }','new','width=1300px,height=550px,location=no,status=no,scrollbars=no');">
+									onClick="window.open('orderdetail.sa?order_num=${order.order_num }&member_id=${order.member_id }','new','width=1300px,height=550px,location=no,status=no,scrollbars=no');">
 									<td style = "${order.order_status eq '주문완료' || order.payment_status eq '결제완료' ? 'background-color : lightgray' : 'background-color : white'  };">${order.order_date }</td>
-									<td style = "${order.order_status eq '주문완료' ? 'background-color : lightgray' : 'background-color : white'  };">${order.order_num }</td>
-									<td style = "${order.order_status eq '주문완료' ? 'background-color : lightgray' : 'background-color : white'  };">${order.member_name }</td>
-									<td style = "${order.order_status eq '주문완료' ? 'background-color : lightgray' : 'background-color : white'  };">${order.order_way }</td>
-									<td style = "${order.order_status eq '주문완료' ? 'background-color : lightgray' : 'background-color : white'  };">${order.total_price }</td>
+									<td style = "${order.order_status eq '주문완료' || order.payment_status eq '결제완료' ? 'background-color : lightgray' : 'background-color : white'  };">${order.order_num }</td>
+									<td style = "${order.order_status eq '주문완료' || order.payment_status eq '결제완료' ? 'background-color : lightgray' : 'background-color : white'  };">${order.member_name }</td>
+									<td style = "${order.order_status eq '주문완료' || order.payment_status eq '결제완료' ? 'background-color : lightgray' : 'background-color : white'  };">${order.order_way }</td>
+									<td style = "${order.order_status eq '주문완료' || order.payment_status eq '결제완료' ? 'background-color : lightgray' : 'background-color : white'  };">${order.total_price }</td>
 									<td style = "${order.payment_status eq '결제완료' ? 'background-color : lightgray' : 'border : solid 1px pink'  };">${order.payment_status }</td>
 									<td style = "${order.order_status eq '주문완료' ? 'background-color : lightgray' : 'border : solid 1px pink'  };">${order.order_status }</td>
 								</tr>

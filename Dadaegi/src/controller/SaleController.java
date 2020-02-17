@@ -9,18 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Mproduct.action.ProductListAction;
+import Mproduct.action.ProductViewAction;
+import Msale.action.OrderDetailAction;
+import Msale.action.OrderListAction;
+import Msale.action.OrderModAction;
+import Msale.action.OrderPayModAction;
+import Msale.action.ReservationDetailAction;
+import Msale.action.ReservationListAction;
+import Msale.action.ReservationModAction;
+import Msale.action.ReservationPayModAction;
 import action.Action;
 import action.ActionForward;
-import product.action.ProductListAction;
-import product.action.ProductViewAction;
-import sale.action.ReservationDetailAction;
-import sale.action.OrderDetailAction;
-import sale.action.OrderListAction;
-import sale.action.OrderModAction;
-import sale.action.OrderPayModAction;
-import sale.action.ReservationListAction;
-import sale.action.ReservationModAction;
-import sale.action.ReservationPayModAction;
 
 /**
  * Servlet implementation class SaleController
@@ -109,6 +109,10 @@ public class SaleController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/calendar.sa")) {
+			forward = new ActionForward();
+			request.setAttribute("pagefile", "/Msale/calendar.jsp");
+			forward.setPath("Mtemplate.jsp");
 		}
 		
 		if (forward != null) {

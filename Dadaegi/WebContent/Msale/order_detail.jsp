@@ -88,29 +88,33 @@ img {
 		<table>
 			<tr>
 				<td id="sub">id</td>
-				<td colspan="3">${orderDetailList.get(0).member_id }</td>
+				<td colspan="3">${member.member_id }</td>
 			</tr>
 			<tr>
 				<td id="sub">구매자명</td>
-				<td colspan="3">${param.member_name }</td>
+				<td colspan="3">${member.member_name }</td>
 			</tr>
 			<tr>
 				<td id="sub">연락처</td>
-				<td colspan="3">${param.member_phone }</td>
+				<td colspan="3">${member.member_phone }</td>
+			</tr>
+			<tr>
+				<td id="sub">주소</td>
+				<td colspan="3">${member.member_zip} ${member.member_addr} ${member.member_addr_detail }</td>
 			</tr>
 			<tr>
 				<td id="sub">이메일</td>
-				<td colspan="3">${param.member_email }</td>
+				<td colspan="3">${member.member_email }</td>
 			</tr>
 			<tr>
 				<td id="sub">생년월일</td>
-				<td width="100px">${param.member_birth }</td>
+				<td width="100px">${member.member_birth }</td>
 				<td id="sub">성별</td>
 				<td width="100px"><br> <input type="radio"
 					name="member_gender" value="남" id="member_gender"
-					${param.member_gender eq '남' ? 'checked' : '' }>남 <br>
+					${member.member_gender eq '남' ? 'checked' : '' }>남 <br>
 					<input type="radio" name="member_gender" value="여"
-					id="member_gender" ${param.member_gender eq '여' ? 'checked' : '' }>여</td>
+					id="member_gender" ${member.member_gender eq '여' ? 'checked' : '' }>여</td>
 			</tr>
 			<tr>
 				<td id="sub">요구사항</td>
@@ -120,6 +124,8 @@ img {
 	</form>
 	<form id="center" action="ordermod.sa" >
 		<input type="hidden" name="order_num" value="${orderDetailList.get(0).order_num }" />
+		<input
+			type="hidden" name="member_id" value="${member.member_id }" />
 		<h2>
 			<img src="images/cupcake.png"> 주문정보
 		</h2>
@@ -167,6 +173,8 @@ img {
 	</form>
 	<form id="right" action="paymentmod.sa">
 	<input type="hidden" name="order_num" value="${orderDetailList.get(0).order_num }" />
+		<input
+			type="hidden" name="member_id" value="${member.member_id }" />
 		<h2>
 			<img src="images/cupcake (1).png"> 요금정보
 		</h2>

@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Mproduct.action.ProductAddAction;
+import Mproduct.action.ProductDeleteAction;
+import Mproduct.action.ProductListAction;
+import Mproduct.action.ProductModAction;
+import Mproduct.action.ProductModProAction;
+import Mproduct.action.ProductViewAction;
 import action.Action;
 import action.ActionForward;
-import product.action.ProductAddAction;
-import product.action.ProductDeleteAction;
-import product.action.ProductListAction;
-import product.action.ProductModAction;
-import product.action.ProductModProAction;
-import product.action.ProductViewAction;
 
 /**
  * Servlet implementation class MasterController
