@@ -6,7 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="vo.Product"%>
 <%@ page import="vo.PageInfo"%>
-<%@page import="java.util.ArrayList"%>
+<%@ page import="java.util.ArrayList"%>
 
 <!DOCTYPE html>
 <html>
