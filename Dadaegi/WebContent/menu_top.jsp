@@ -80,13 +80,13 @@ h2 {
 	<br>
 	<div style="float: right;">
 		<c:choose>
-			<c:when test="${member_id eq null }">
+			<c:when test="${member.member_id eq null }">
 				<a class="loginlink" href="loginForm.log">로그인</a>
 			</c:when>
 			<c:otherwise>
-			${sessionScope.member_id}님, 환영합니다!
-			<a class="loginlink" href="memberInfo.mem">마이페이지</a>
-			<a class="loginlink" href="logout.log">로그아웃</a>
+			${member.member_id}님, 환영합니다!
+			<a class="loginlink" href="memberInfo.mem?member_id=${member.member_id }">마이페이지</a>
+			<a class="loginlink" href="logout.log">로그아웃</a>      
 			</c:otherwise>
 		</c:choose>
 	</div>
