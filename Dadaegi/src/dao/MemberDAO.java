@@ -97,4 +97,51 @@ public class MemberDAO {
 		return insertCount;
 	}
 
+	public int modMember(Member member) {
+		// TODO Auto-generated method stub
+		int modCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "update member set member_pw=?,member_name=?,member_phone=?,member_birth=?,member_gender=?,member_email=?,member_zip=?,member_addr=?,member_addr_detail=? where member_id=?";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(10, member.getMember_id());
+			pstmt.setString(1, member.getMember_pw());
+			pstmt.setString(2, member.getMember_name());
+			pstmt.setString(3, member.getMember_phone());
+			pstmt.setString(4, member.getMember_birth());
+			pstmt.setString(5, member.getMember_gender());
+			pstmt.setString(6, member.getMember_email());
+			pstmt.setString(7, member.getMember_zip());
+			pstmt.setString(8, member.getMember_addr());
+			pstmt.setString(9, member.getMember_addr_detail());
+			
+			modCount = pstmt.executeUpdate();
+		} catch (Exception ex) {
+			System.out.println("boardModify 에러 : " + ex);
+		} finally {
+			close(pstmt);
+		}
+		return modCount;
+	}
+
+	public int deleteMember(String delete_id) {
+		// TODO Auto-generated method stub
+		int deleteCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM member WHERE member_id=?";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, delete_id);
+					
+			deleteCount = pstmt.executeUpdate();
+		} catch (Exception ex) {
+			System.out.println("boardModify 에러 : " + ex);
+		} finally {
+			close(pstmt);
+		}
+		return deleteCount;
+	}
+
 }
