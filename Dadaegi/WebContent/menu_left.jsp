@@ -405,7 +405,7 @@ footer a {
 				<li><a href="list.pro?product_code=cake">컵씨들</a></li>
 				<li><a href="list.pro?product_code=drink">음료씨들</a></li>
 				<li><a href="addForm.pro">상품추가</a></li>
-				<li><a>재고관리</a></li>
+				<li><a href="stock.pro">재고관리</a></li>
 			</ul>
 		</li>
 		<li data-extension="close">
@@ -422,7 +422,6 @@ footer a {
 				<span class="folder"> </span><a>정산관리</a>
 			</div>
 			<ul class="sub">
-				<li><a>상품 입/출고</a></li>
 				<li><a>총 매출</a></li>
 			</ul>
 		</li>

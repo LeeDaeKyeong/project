@@ -100,7 +100,8 @@ img {
 			</tr>
 			<tr>
 				<td id="sub">주소</td>
-				<td colspan="3">${member.member_zip} ${member.member_addr} ${member.member_addr_detail }</td>
+				<td colspan="3">${member.member_zip}${member.member_addr}
+					${member.member_addr_detail }</td>
 			</tr>
 			<tr>
 				<td id="sub">이메일</td>
@@ -122,26 +123,52 @@ img {
 			</tr>
 		</table>
 	</form>
-	<form id="center" action="ordermod.sa" >
-		<input type="hidden" name="order_num" value="${orderDetailList.get(0).order_num }" />
-		<input
-			type="hidden" name="member_id" value="${member.member_id }" />
+	<form id="center" action="ordermod.sa">
+		<input type="hidden" name="order_num"
+			value="${orderDetailList.get(0).order_num }" /> <input type="hidden"
+			name="member_id" value="${member.member_id }" />
 		<h2>
 			<img src="images/cupcake.png"> 주문정보
 		</h2>
 		<table>
-
-			<tr>
-				<td id="sub">주문상태</td>
-				<td><select name="order_status">
-						<option value="주문대기"
-							${orderDetailList.get(0).order_status eq '주문대기' ? 'selected' : '' }>주문대기</option>
-						<option value="주문완료"
-							${orderDetailList.get(0).order_status eq '주문완료' ? 'selected' : '' }>주문완료</option>
-						<option value="주문취소"
-							${orderDetailList.get(0).order_status eq '주문취소' ? 'selected' : '' }>주문취소</option>
-				</select><input type="submit" value="주문 수정"></td>
-			</tr>
+			<c:choose>
+				<c:when test="${orderDetailList.get(0).order_way eq '온라인' }">
+					<tr>
+						<td id="sub">주문상태</td>
+						<td><select name="order_status">
+								<option value="주문대기"
+									${orderDetailList.get(0).order_status eq '주문대기' ? 'selected' : '' }>주문대기</option>
+								<option value="주문완료"
+									${orderDetailList.get(0).order_status eq '주문완료' ? 'selected' : '' }>주문완료</option>
+								<option value="준비중"
+									${orderDetailList.get(0).order_status eq '준비중' ? 'selected' : '' }>준비중</option>
+								<option value="배달중"
+									${orderDetailList.get(0).order_status eq '배달중' ? 'selected' : '' }>배달중</option>
+								<option value="배달완료"
+									${orderDetailList.get(0).order_status eq '배달완료' ? 'selected' : '' }>배달완료</option>
+								<option value="주문취소"
+									${orderDetailList.get(0).order_status eq '주문취소' ? 'selected' : '' }>주문취소</option>
+						</select><input type="submit" value="주문 수정"></td>
+					</tr>
+				</c:when>
+				<c:otherwise>
+					<tr>
+						<td id="sub">주문상태</td>
+						<td><select name="order_status">
+								<option value="주문대기"
+									${orderDetailList.get(0).order_status eq '주문대기' ? 'selected' : '' }>주문대기</option>
+								<option value="주문완료"
+									${orderDetailList.get(0).order_status eq '주문완료' ? 'selected' : '' }>주문완료</option>
+								<option value="준비중"
+									${orderDetailList.get(0).order_status eq '준비중' ? 'selected' : '' }>준비중</option>
+								<option value="전달완료"
+									${orderDetailList.get(0).order_status eq '전달완료' ? 'selected' : '' }>전달완료</option>
+								<option value="주문취소"
+									${orderDetailList.get(0).order_status eq '주문취소' ? 'selected' : '' }>주문취소</option>
+						</select><input type="submit" value="주문 수정"></td>
+					</tr>
+				</c:otherwise>
+			</c:choose>
 			<tr>
 				<td id="sub">주문번호</td>
 				<td>${orderDetailList.get(0).order_num }</td>
@@ -172,9 +199,9 @@ img {
 		</table>
 	</form>
 	<form id="right" action="paymentmod.sa">
-	<input type="hidden" name="order_num" value="${orderDetailList.get(0).order_num }" />
-		<input
-			type="hidden" name="member_id" value="${member.member_id }" />
+		<input type="hidden" name="order_num"
+			value="${orderDetailList.get(0).order_num }" /> <input type="hidden"
+			name="member_id" value="${member.member_id }" />
 		<h2>
 			<img src="images/cupcake (1).png"> 요금정보
 		</h2>
