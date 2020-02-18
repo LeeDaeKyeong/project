@@ -86,7 +86,7 @@ h2 {
 			<c:otherwise>
 				${member.member_id}님, 환영합니다!
 				<a class="loginlink" href="memberInfo.mem?member_id=${member.member_id }">마이페이지</a>
-				<a class="loginlink" href="logout.log">로그아웃</a>      
+				<a class="loginlink" href="logout.log">로그아웃</a>     
 			</c:otherwise>
 		</c:choose>
 	</div>
