@@ -11,7 +11,7 @@
 <style>
 table {
 	margin: auto;
-	width: 400px;
+	width: 500px;
 	border: 1px solid gray;
 	text-align: center;
 }
@@ -20,6 +20,7 @@ table {
 <body>
 <table>
 		<tr>
+		<br>
 			<td>아이디 : </td>
 			<td>${member.member_id }</td>
 		</tr>
@@ -49,7 +50,10 @@ table {
 		</tr>
 		<tr>
 			<td colspan="2">
-				<a href="main.cup">메인으로 돌아가기</a>
+			<br>
+				<a href="memberMod.mem?member_id=${member.member_id}">수정</a>&nbsp;&nbsp;
+				<a href="memberDelete.mem?member_id=${member.member_id }">탈퇴</a>&nbsp;&nbsp;
+				<a href="main.cup">메인으로</a>
 			</td>
 		</tr>
 	</table>

@@ -16,7 +16,6 @@ public class LoginAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		
 		String member_id = request.getParameter("member_id");
 		String member_pw = request.getParameter("member_pw");
 		ActionForward forward = null;

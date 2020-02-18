@@ -29,7 +29,7 @@ a {
 .gnb { /* width : 720px; */
 	height: 36px;
 	margin: auto;
-	margin-top: 0;
+	margin-top: 10px;
 }
 /* 메인메뉴 영역 */
 .gnb>ul>li {
@@ -80,13 +80,16 @@ h2 {
 	<br>
 	<div style="float: right;">
 		<c:choose>
-			<c:when test="${member_id eq null }">
+			<c:when test="${member eq null }">
 				<a class="loginlink" href="loginForm.log">로그인</a>
 			</c:when>
 			<c:otherwise>
-			${sessionScope.member_id}님, 환영합니다!
-			<a class="loginlink" href="memberInfo.mem">마이페이지</a>
-			<a class="loginlink" href="logout.log">로그아웃</a>
+				<a href="#"> <!-- 추후에 if문으로 알림 전 후 이미지 설정하기 -->
+				<img src="images/alarm.jpg" width="15px" height="15px" align="center" border="0">
+				</a>
+				${member.member_id}님, 환영합니다!
+				<a class="loginlink" href="memberInfo.mem?member_id=${member.member_id}">마이페이지</a>
+				<a class="loginlink" href="logout.log">로그아웃</a>
 			</c:otherwise>
 		</c:choose>
 	</div>
