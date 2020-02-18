@@ -94,7 +94,7 @@
 
 	}
 
-	//]]>
+			//]]>
 </script>
 </head>
 <body>
@@ -104,65 +104,71 @@
 		<p>예약목록</p>
 		<c:choose>
 			<c:when test="${reservationList ne null }">
-				<form method="post">
-					<table id="reservationList" width="100%"
-						class="table table-bordered table-hover text-center">
-						<thead>
-							<tr class="tr_top" height="40px">
-								<td>구매일자</td>
-								<td>예약번호</td>
-								<td>예약자명</td>
-								<td>연락처</td>
-								<td>예약일자</td>
-								<td>결제상태</td>
-								<td>예약상태</td>
+
+				<table id="reservationList" width="100%"
+					class="table table-bordered table-hover text-center">
+					<thead>
+						<tr class="tr_top" height="40px">
+							<td>구매일자</td>
+							<td>예약번호</td>
+							<td>예약자명</td>
+							<td>연락처</td>
+							<td>예약일자</td>
+							<td>결제상태</td>
+							<td>예약상태</td>
+						</tr>
+					</thead>
+					<c:forEach items="${reservationList }" var="reservation">
+						<tbody>
+							<tr height="40px" style="cursor: pointer;"
+								onClick="window.open('reservationdetail.sa?reservation_num=${reservation.reservation_num }&member_id=${reservation.member_id }','new','width=1300px,height=550px,location=no,status=no,scrollbars=no');">
+								<td
+									style="${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.payment_date }</td>
+								<td
+									style="${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.reservation_num }</td>
+								<td
+									style="${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.member_name }</td>
+								<td
+									style="${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.member_phone }</td>
+								<td
+									style="${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.reservation_date }</td>
+								<td
+									style="${reservation.payment_status eq '결제완료' ? 'background-color : lightgray' : 'border : solid 1px pink'  };">${reservation.payment_status }</td>
+								<td
+									style="${reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'border : solid 1px pink'  };">${reservation.reservation_status }</td>
 							</tr>
-						</thead>
-						<c:forEach items="${reservationList }" var="reservation">
-							<tbody>
-								<tr height="40px"
-									style="cursor: pointer;"
-									onClick="window.open('reservationdetail.sa?reservation_num=${reservation.reservation_num }&member_id=${reservation.member_id }','new','width=1300px,height=550px,location=no,status=no,scrollbars=no');">
-									<td style = "${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.payment_date }</td>
-									<td style = "${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.reservation_num }</td>
-									<td style = "${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.member_name }</td>
-									<td style = "${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.member_phone }</td>
-									<td style = "${reservation.payment_status eq '결제완료' || reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'background-color : white'  };">${reservation.reservation_date }</td>
-									<td style = "${reservation.payment_status eq '결제완료' ? 'background-color : lightgray' : 'border : solid 1px pink'  };">${reservation.payment_status }</td>
-									<td style = "${reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'border : solid 1px pink'  };">${reservation.reservation_status }</td>
-								</tr>
-							</tbody>
-						</c:forEach>
-					</table>
-					<section id="pageList">
-						<c:choose>
-							<c:when test="${pageInfo.page <=1 }">
+						</tbody>
+					</c:forEach>
+				</table>
+				<section id="pageList">
+					<c:choose>
+						<c:when test="${pageInfo.page <=1 }">
 						[이전]&nbsp;
 					</c:when>
-							<c:otherwise>
-								<a href="reservation.sa?page=${pageInfo.page-1 }">[이전]</a>&nbsp;
+						<c:otherwise>
+							<a href="reservation.sa?page=${pageInfo.page-1 }">[이전]</a>&nbsp;
 					</c:otherwise>
-						</c:choose>
-						<c:forEach var="a" begin="${pageInfo.startPage }"
-							end="${pageInfo.endPage }" step="1">
-							<c:choose>
-								<c:when test="${a==pageInfo.page }">
+					</c:choose>
+					<c:forEach var="a" begin="${pageInfo.startPage }"
+						end="${pageInfo.endPage }" step="1">
+						<c:choose>
+							<c:when test="${a==pageInfo.page }">
 							[${a }]
 						</c:when>
-								<c:otherwise>
-									<a href="reservation.sa?page=${a }">[${a }] </a>&nbsp;
+							<c:otherwise>
+								<a href="reservation.sa?page=${a }">[${a }] </a>&nbsp;
 						</c:otherwise>
-							</c:choose>
-						</c:forEach>
-						<c:choose>
-							<c:when test="${pageInfo.page >= pageInfo.maxPage }">
+						</c:choose>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${pageInfo.page >= pageInfo.maxPage }">
 						[다음]
 					</c:when>
-							<c:otherwise>
-								<a href="reservation.sa?page=${pageInfo.page+1 }">[다음]</a>
-							</c:otherwise>
-						</c:choose>
-					</section>
+						<c:otherwise>
+							<a href="reservation.sa?page=${pageInfo.page+1 }">[다음]</a>
+						</c:otherwise>
+					</c:choose>
+				</section>
 			</c:when>
 			<c:otherwise>
 				<table>
@@ -171,7 +177,7 @@
 								없습니다.</section></td>
 					</tr>
 				</table>
-				</form>
+
 			</c:otherwise>
 		</c:choose>
 	</section>

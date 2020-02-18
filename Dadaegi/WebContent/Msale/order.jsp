@@ -182,7 +182,5 @@
 			</c:otherwise>
 		</c:choose>
 	</section>
-	<div class="col-lg-12" id="ex1_Result1"></div>
-	<div class="col-lg-12" id="ex1_Result2"></div>
 </body>
 </html>

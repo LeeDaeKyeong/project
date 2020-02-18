@@ -15,6 +15,7 @@ import Mproduct.action.ProductListAction;
 import Mproduct.action.ProductModAction;
 import Mproduct.action.ProductModProAction;
 import Mproduct.action.ProductViewAction;
+import Mproduct.action.StockDetailAction;
 import Mproduct.action.StockListAction;
 import action.Action;
 import action.ActionForward;
@@ -95,6 +96,13 @@ public class ProductController extends HttpServlet {
 			}
 		}else if(command.equals("/stock.pro")) {
 			action = new StockListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/stockdetail.pro")) {
+			action = new StockDetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

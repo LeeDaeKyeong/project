@@ -8,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import vo.Order;
 import vo.Product;
+import vo.Stock;
 
 public class ProductDAO {
 
@@ -163,7 +165,7 @@ public class ProductDAO {
 		String sql = "update cup set product_code=?, product_price=?, product_content=?, product_date=?, product_status=? where product_name=?";
 		try {
 			pstmt = con.prepareStatement(sql);
-			
+
 			pstmt.setString(1, product.getProduct_code());
 			pstmt.setInt(2, product.getProduct_price());
 //			pstmt.setString(4, product.getProduct_image());
@@ -172,13 +174,13 @@ public class ProductDAO {
 			pstmt.setString(5, product.getProduct_status());
 			pstmt.setString(6, product.getProduct_name());
 			modCount = pstmt.executeUpdate();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		System.out.println("dao"+modCount);
+		System.out.println("dao" + modCount);
 		return modCount;
 	}
 
@@ -189,14 +191,109 @@ public class ProductDAO {
 		int deleteCount = 0;
 		try {
 			pstmt = con.prepareStatement(product_delete_sql);
-			pstmt.setString(1, delete_product_name+"%");
+			pstmt.setString(1, delete_product_name + "%");
 			deleteCount = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		System.out.println("dao"+deleteCount);
+		System.out.println("dao" + deleteCount);
 		return deleteCount;
+	}
+
+	public int selectStockCount() {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int listCount = 0;
+		String sql = "select count(*) from stock";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				listCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return listCount;
+	}
+
+	public ArrayList<Stock> selectStockList(int page, int limit) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Stock> stockList = null;
+		String sql = "select c.product_code, product_name, product_image, product_price, sum(inout_quantity) qty, stock_status from cup c left join stock s on c.product_code=s.product_code group by c.product_code, stock_status order by c.product_code, stock_status limit ?,?";
+		int startrow = (page - 1) * limit;
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startrow);
+			pstmt.setInt(2, limit);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				stockList = new ArrayList<Stock>();
+				do {
+					Stock stock = new Stock();
+					stock.setProduct_code(rs.getString("product_code"));
+					//stock.setStock_index(rs.getInt("stock_index"));
+//					stock.setInout_date(rs.getInt("inout_date"));
+					stock.setInout_quantity(rs.getInt("qty"));
+					stock.setStock_status(rs.getString("stock_status"));
+					stock.setProduct_name(rs.getString("product_name"));
+					stock.setProduct_image(rs.getString("product_image"));
+					stock.setProduct_price(rs.getInt("product_price"));
+					stockList.add(stock);
+				} while (rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return stockList;
+	}
+
+	public ArrayList<Stock> selectStockDetailList(String product_code) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Stock> stockDetailList = null;
+		String sql = "SELECT c.product_code, product_name, product_image, product_price, s.inout_date, s.inout_quantity, s.stock_status FROM cup c LEFT JOIN stock s ON c.product_code = s.product_code where s.product_code = ?";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, product_code);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				stockDetailList = new ArrayList<Stock>();
+				do {
+					Stock stock = new Stock();
+					stock.setProduct_code(rs.getString("product_code"));
+					stock.setProduct_image(rs.getString("product_image"));
+					stock.setProduct_name(rs.getString("product_name"));
+					stock.setProduct_price(rs.getInt("product_price"));
+					stock.setInout_date(rs.getInt("inout_date"));
+					stock.setInout_quantity(rs.getInt("inout_quantity"));
+					stock.setStock_status(rs.getString("stock_status"));
+					stockDetailList.add(stock);
+				} while (rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return stockDetailList;
 	}
 }
