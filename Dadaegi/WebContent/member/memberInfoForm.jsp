@@ -48,6 +48,7 @@ table {
 			<td>이메일 주소:</td>
 			<td>${member.member_email }</td>
 		</tr>
+		
 		<tr>
 			<td colspan="2">
 			<br>

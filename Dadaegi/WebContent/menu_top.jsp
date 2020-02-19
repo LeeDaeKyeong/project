@@ -70,11 +70,21 @@ h2 {
 	text-align: right;
 	margin-left: auto;
 }
+
+#rogo{
+width : 150px;
+height : 100px;
+}
+
+#alarm{
+width: 15px;
+height: 15px;
+}
 </style>
 </head>
 <body>
-	<a href="main.cup"> <img
-		src="images/rogo.jpg" width="150px" height="100px" align="center"
+	<a href="main.cup"> 
+		<img id="rogo" src="images/rogo.jpg" align="center"
 		border="0">
 	</a>
 	<br>
@@ -85,7 +95,7 @@ h2 {
 			</c:when>
 			<c:otherwise>
 				<a href="#"> <!-- 추후에 if문으로 알림 전 후 이미지 설정하기 -->
-				<img src="images/alarm.jpg" width="15px" height="15px" align="center" border="0">
+				<img id="alarm" src="images/alarm.jpg" align="center" border="0">
 				</a>
 				${member.member_id}님, 환영합니다!
 				<a class="loginlink" href="memberInfo.mem?member_id=${member.member_id}">마이페이지</a>

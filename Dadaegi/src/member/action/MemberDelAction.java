@@ -34,6 +34,7 @@ public class MemberDelAction implements Action {
 		} else {
 			out.println("<script>");
 			out.println("alert('" + delete_id + "님의 탈퇴가 완료되었습니다.')");
+			session.invalidate();
 			out.println("location.href='main.cup'");
 			out.println("</script>");
 		}

@@ -136,37 +136,37 @@ table {
 				<table class="mytable" cellspacing="0" cellpadding="0">
 					<tr>
 						<td id="td_left"><label for="userName">주문인</label></td>
-						<td>홍길동</td>
+						<td>${member.member_name }</td>
 					</tr>
 					<tr>
 						<td id="td_left"><label for="receiver">받는 사람</label></td>
 						<td><input type="text" id="receiver" name="receiver"
-							value="홍길동"></td>
+							value=${member.member_name }></td>
 					</tr>
 					<tr>
 						<td id="td_left"><label for="userID">연락처</label></td>
 						<td><input type="text" id="phone" name="phone"
-							value="01012345678"></td>
+							value=${member.member_phone }></td>
 					</tr>
 					<tr>
 						<td id="td_left"><label for="userID">이메일</label></td>
 						<td><input type="text" id="email" name="email"
-							value="test2@naver.com"></td>
+							value=${member.member_email }></td>
 					</tr>
 					<tr>
 						<td rowspan="3" id="td_left"><label for="userID">주소</label></td>
 						<td><input type="text" name="userAddr1" id="userAddr1"
-							size="7" value="42611" />
+							size="7" value=${member.member_zip } />
 							<button type="button" onclick="sample6_execDaumPostcode()"
 								id="gbutton" style="width: 70px;">주소검색</button></td>
 					</tr>
 					<tr>
 						<td><input type="text" name="userAddr2" id="userAddr2"
-							value="대구 달서구 계대동문로 77 (이곡동, 이곡2동행정복지센터)" size="40"></td>
+							value="${member.member_addr }" size="40"></td>
 					</tr>
 					<tr>
 						<td><input type="text" name="userAddr3" id="userAddr3"
-							value="11111" size="40"> <script
+							value="${member.member_addr_detail }" size="40"> <script
 								src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 						</td>
 					</tr>

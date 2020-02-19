@@ -86,7 +86,7 @@ function cart() {
 #listForm {
 	width: 640px;
 	height: auto;
-	border: 1px solid red;
+	border: 1px solid white;
 	margin: auto;
 }
 

@@ -11,7 +11,7 @@
 <style type="text/css">
 #listForm {
 	width: auto;
-	border: 1px solid red;
+	border: 1px solid white;
 	margin: auto;
 }
 
