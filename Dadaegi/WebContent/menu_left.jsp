@@ -422,7 +422,7 @@ footer a {
 				<span class="folder"> </span><a>정산관리</a>
 			</div>
 			<ul class="sub">
-				<li><a>총 매출</a></li>
+				<li><a href="totalsale.ca">총 매출</a></li>
 			</ul>
 		</li>
 		<li>

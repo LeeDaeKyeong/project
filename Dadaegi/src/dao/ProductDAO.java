@@ -198,7 +198,7 @@ public class ProductDAO {
 		} finally {
 			close(pstmt);
 		}
-		System.out.println("dao" + deleteCount);
+		
 		return deleteCount;
 	}
 
@@ -267,8 +267,8 @@ public class ProductDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Stock> stockDetailList = null;
-		String sql = "SELECT c.product_code, product_name, product_image, product_price, s.inout_date, s.inout_quantity, s.stock_status FROM cup c LEFT JOIN stock s ON c.product_code = s.product_code where s.product_code = ?";
-
+		String sql = "SELECT c.product_code, product_name, product_image, product_price, s.inout_date, s.inout_quantity, s.stock_status FROM cup c LEFT JOIN stock s ON c.product_code = s.product_code where s.product_code = ? order by s.inout_date desc";
+		
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, product_code);
@@ -281,11 +281,13 @@ public class ProductDAO {
 					stock.setProduct_image(rs.getString("product_image"));
 					stock.setProduct_name(rs.getString("product_name"));
 					stock.setProduct_price(rs.getInt("product_price"));
-					stock.setInout_date(rs.getInt("inout_date"));
+					stock.setInout_date(rs.getString("inout_date"));
 					stock.setInout_quantity(rs.getInt("inout_quantity"));
 					stock.setStock_status(rs.getString("stock_status"));
 					stockDetailList.add(stock);
+					
 				} while (rs.next());
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -293,7 +295,156 @@ public class ProductDAO {
 			close(rs);
 			close(pstmt);
 		}
-
+		
 		return stockDetailList;
+	}
+
+	public int insertStock(Stock stock) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		int insertCount = 0;
+		String sql = "";
+
+		try {
+			sql = "INSERT INTO stock (product_code, inout_date, inout_quantity, stock_status) VALUES (?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, stock.getProduct_code());
+			pstmt.setString(2, stock.getInout_date());
+			pstmt.setInt(3, stock.getInout_quantity());
+			pstmt.setString(4, stock.getStock_status());
+			
+			insertCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return insertCount;
+	}
+
+	public ArrayList<Stock> selectinStockDetailList(String product_code, int inpage, int inlimit) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Stock> instockDetailList = null;
+		int instartrow = (inpage - 1) * inlimit;
+		String sql = "SELECT c.product_code, product_name, product_image, product_price, s.inout_date, s.inout_quantity, s.stock_status FROM cup c LEFT JOIN stock s ON c.product_code = s.product_code where s.product_code = ? and stock_status='in' order by s.inout_date desc limit ?,?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, product_code);
+			pstmt.setInt(2, instartrow);
+			pstmt.setInt(3, inlimit);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				instockDetailList = new ArrayList<Stock>();
+				do {
+					Stock stock = new Stock();
+					stock.setProduct_code(rs.getString("product_code"));
+					stock.setProduct_image(rs.getString("product_image"));
+					stock.setProduct_name(rs.getString("product_name"));
+					stock.setProduct_price(rs.getInt("product_price"));
+					stock.setInout_date(rs.getString("inout_date"));
+					stock.setInout_quantity(rs.getInt("inout_quantity"));
+					stock.setStock_status(rs.getString("stock_status"));
+					instockDetailList.add(stock);
+					
+				} while (rs.next());
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return instockDetailList;
+	}
+
+	public ArrayList<Stock> selectoutStockDetailList(String product_code, int outpage, int outlimit) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Stock> outstockDetailList = null;
+		int outstartrow = (outpage - 1) * outlimit;
+		String sql = "SELECT c.product_code, product_name, product_image, product_price, s.inout_date, s.inout_quantity, s.stock_status FROM cup c LEFT JOIN stock s ON c.product_code = s.product_code where s.product_code = ? and stock_status='out' order by s.inout_date desc limit ?,?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, product_code);
+			pstmt.setInt(2, outstartrow);
+			pstmt.setInt(3, outlimit);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				outstockDetailList = new ArrayList<Stock>();
+				do {
+					Stock stock = new Stock();
+					stock.setProduct_code(rs.getString("product_code"));
+					stock.setProduct_image(rs.getString("product_image"));
+					stock.setProduct_name(rs.getString("product_name"));
+					stock.setProduct_price(rs.getInt("product_price"));
+					stock.setInout_date(rs.getString("inout_date"));
+					stock.setInout_quantity(rs.getInt("inout_quantity"));
+					stock.setStock_status(rs.getString("stock_status"));
+					outstockDetailList.add(stock);
+					
+				} while (rs.next());
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return outstockDetailList;
+	}
+
+	public int selectinStockCount() {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int inlistCount = 0;
+		String sql = "select count(*) from stock where stock_status='in'";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				inlistCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return inlistCount;
+	}
+
+	public int selectoutStockCount() {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int outlistCount = 0;
+		String sql = "select count(*) from stock where stock_status='out'";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				outlistCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return outlistCount;
 	}
 }

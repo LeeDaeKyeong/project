@@ -4,7 +4,7 @@ public class Stock {
 
 	private int stock_index;
 	private String product_code;
-	private int inout_date;
+	private String inout_date;
 	private int inout_quantity;
 	private String stock_status;
 	private String product_image;
@@ -51,11 +51,11 @@ public class Stock {
 		this.product_code = product_code;
 	}
 
-	public int getInout_date() {
+	public String getInout_date() {
 		return inout_date;
 	}
 
-	public void setInout_date(int inout_date) {
+	public void setInout_date(String inout_date) {
 		this.inout_date = inout_date;
 	}
 
