@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,21 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Mcaculate.action.TotalSaleAction;
-
+import Mqna.action.QnaAnswerAction;
+import Mqna.action.ReviewAnswerAction;
 import action.Action;
 import action.ActionForward;
 
 /**
- * Servlet implementation class CalculateController
+ * Servlet implementation class QnaController
  */
-@WebServlet("*.ca")
-public class CalculateController extends HttpServlet {
+@WebServlet("*.qn")
+public class QnaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CalculateController() {
+	public QnaController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -41,17 +41,28 @@ public class CalculateController extends HttpServlet {
 		Action action = null;
 		System.out.println(command);
 
-		if (command.equals("/totalsale.ca")) {
-			action = new TotalSaleAction();
+		if (command.equals("/qnalist.qn")) {
+			forward = new ActionForward();
+			request.setAttribute("pagefile", "Mqna/qna_list.jsp");
+			forward.setPath("Mtemplate.jsp");
+		} else if (command.equals("/reviewlist.qn")) {
+			forward = new ActionForward();
+			request.setAttribute("pagefile", "Mqna/review_list.jsp");
+			forward.setPath("Mtemplate.jsp");
+		}else if (command.equals("/question.qn")) {
+			action = new QnaAnswerAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/calculate.ca")) {
-			forward = new ActionForward();
-    		request.setAttribute("pagefile", "Mcalculate/totalsale.jsp");
-    		forward.setPath("Mtemplate.jsp");
+		} else if (command.equals("/review.qn")) {
+			action = new ReviewAnswerAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		if (forward != null) {

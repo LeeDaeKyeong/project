@@ -422,7 +422,7 @@ footer a {
 				<span class="folder"> </span><a>정산관리</a>
 			</div>
 			<ul class="sub">
-				<li><a href="totalsale.ca">총 매출</a></li>
+				<li><a href="calculate.ca">총 매출</a></li>
 			</ul>
 		</li>
 		<li>
@@ -430,8 +430,8 @@ footer a {
 				<span class="folder"> </span><a>문의/리뷰관리</a>
 			</div>
 			<ul class="sub">
-				<li><a>상품리뷰답변</a></li>
-				<li><a>상품문의답변</a></li>
+				<li><a href="reviewlist.qn">상품리뷰답변</a></li>
+				<li><a href="qnalist.qn">상품문의답변</a></li>
 			</ul>
 		</li>
 		<li>

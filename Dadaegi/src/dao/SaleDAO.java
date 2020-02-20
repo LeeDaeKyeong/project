@@ -118,7 +118,7 @@ public class SaleDAO {
 				orderList = new ArrayList<Order>();
 				do {
 					Order order = new Order();
-					order.setOrder_date(rs.getInt("order_date"));
+					order.setOrder_date(rs.getString("order_date"));
 					order.setOrder_num(rs.getInt("order_num"));
 					order.setMember_id(rs.getString("member_id"));
 					order.setMember_name(rs.getString("member_name"));
@@ -183,7 +183,7 @@ public class SaleDAO {
 					order.setMember_id(rs.getString("member_id"));
 					order.setTotal_price(rs.getInt("total_price"));
 					order.setOrder_status(rs.getString("order_status"));
-					order.setOrder_date(rs.getInt("order_date"));
+					order.setOrder_date(rs.getString("order_date"));
 					order.setPayment_way(rs.getString("payment_way"));
 					order.setPayment_date(rs.getInt("payment_date"));
 					order.setOrder_way(rs.getString("order_way"));

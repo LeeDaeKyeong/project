@@ -12,7 +12,7 @@ public class Order {
 
 	private int total_price;
 	private String order_status;
-	private int order_date;
+	private String order_date;
 	private String payment_way;
 	private int payment_date;
 	private String order_way;
@@ -23,7 +23,7 @@ public class Order {
 	private String confirm;
 	private int product_quantity;
 
-	public Order(int order_num, String member_id, int total_price, String order_status, int order_date,
+	public Order(int order_num, String member_id, int total_price, String order_status, String order_date,
 			String payment_way, int payment_date, String order_way, String demand, String payment_status, int coupon,
 			String confirm, String product_name, int product_quantity) {
 		// TODO Auto-generated constructor stub
@@ -135,11 +135,11 @@ public class Order {
 		this.order_status = order_status;
 	}
 
-	public int getOrder_date() {
+	public String getOrder_date() {
 		return order_date;
 	}
 
-	public void setOrder_date(int order_date) {
+	public void setOrder_date(String order_date) {
 		this.order_date = order_date;
 	}
 
