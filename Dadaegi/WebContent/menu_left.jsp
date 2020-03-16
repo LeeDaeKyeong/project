@@ -431,7 +431,7 @@ footer a {
 			</div>
 			<ul class="sub">
 				<li><a href="reviewlist.qn">상품리뷰답변</a></li>
-				<li><a href="qnalist.qn">상품문의답변</a></li>
+				<li><a href="questionlist.qn">상품문의답변</a></li>
 			</ul>
 		</li>
 		<li>

@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Mcaculate.action.TotalSaleAction;
-import Mqna.action.QnaAnswerAction;
-import Mqna.action.ReviewAnswerAction;
+import Mqna.action.QuestionDetailAction;
+import Mqna.action.QuestionListAction;
+import Mqna.action.QuestionReplyAction;
+import Mqna.action.ReviewDetailAction;
+import Mqna.action.ReviewListAction;
 import action.Action;
 import action.ActionForward;
 
@@ -41,23 +43,36 @@ public class QnaController extends HttpServlet {
 		Action action = null;
 		System.out.println(command);
 
-		if (command.equals("/qnalist.qn")) {
-			forward = new ActionForward();
-			request.setAttribute("pagefile", "Mqna/qna_list.jsp");
-			forward.setPath("Mtemplate.jsp");
+		if (command.equals("/questionlist.qn")) {
+			action = new QuestionListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (command.equals("/reviewlist.qn")) {
-			forward = new ActionForward();
-			request.setAttribute("pagefile", "Mqna/review_list.jsp");
-			forward.setPath("Mtemplate.jsp");
+			action = new ReviewListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}else if (command.equals("/question.qn")) {
-			action = new QnaAnswerAction();
+			action = new QuestionDetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/review.qn")) {
-			action = new ReviewAnswerAction();
+			action = new ReviewDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (command.equals("/questionReply.qn")) {
+			action = new QuestionReplyAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

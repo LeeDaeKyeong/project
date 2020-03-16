@@ -8,16 +8,14 @@ import java.util.ArrayList;
 import static db.JdbcUtil.*;
 import javax.sql.DataSource;
 
-import vo.Member;
 import vo.Order;
-import vo.Product;
 import vo.Reservation;
 
 public class SaleDAO {
 
 	DataSource ds;
 	Connection con;
-	private static SaleDAO reservationDao;
+	private static SaleDAO saleDao;
 
 	private SaleDAO() {
 
@@ -25,10 +23,10 @@ public class SaleDAO {
 
 	public static SaleDAO getInstance() {
 		// TODO Auto-generated method stub
-		if (reservationDao == null) {
-			reservationDao = new SaleDAO();
+		if (saleDao == null) {
+			saleDao = new SaleDAO();
 		}
-		return reservationDao;
+		return saleDao;
 	}
 
 	public void setConnection(Connection con) {
@@ -130,7 +128,7 @@ public class SaleDAO {
 					order.setOrder_way(rs.getString("order_way"));
 					order.setTotal_price(rs.getInt("total_price"));
 					order.setOrder_status(rs.getString("order_status"));
-					order.setConfirm(rs.getString("confirm"));
+//					order.setConfirm(rs.getString("confirm"));
 					orderList.add(order);
 				} while (rs.next());
 			}
@@ -190,7 +188,7 @@ public class SaleDAO {
 					order.setDemand(rs.getString("demand"));
 					order.setPayment_status(rs.getString("payment_status"));
 					order.setCoupon(rs.getInt("coupon"));
-					order.setConfirm(rs.getString("confirm"));
+//					order.setConfirm(rs.getString("confirm"));
 					order.setProduct_name(rs.getString("product_name"));
 					order.setProduct_quantity(rs.getInt("product_quantity"));
 					orderDetailList.add(order);
